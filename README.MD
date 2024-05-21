@@ -8,5 +8,5 @@
  - Clone o repositório do GitHub: https://github.com/CarlosSallet159/Quiz.git
  - Caso não tenha as dependencias necessárias (express e websocket) instale-as, digitando "npm install express" e "npm install ws".
  - Inicie o servidor digitando "node server.js".
- - Tenha algum navegador ou extensão que aceite conexão websocket, como por exemplo a extensão "WebSocket King", digite o link "localhost:8080" e acesse.
+ - No navegador, digite o link "localhost:8080" e acesse.
  - Aproveite o jogo.

@@ -1,20 +1,38 @@
+const express = require('express');
+const http = require('http');
 const WebSocket = require('ws');
-const wss = new WebSocket.Server({ port: 8080 });
+
+const app = express();
+
+// Servir arquivos estáticos (opcional)
+app.use(express.static('public'));
+
+// Criar um servidor HTTP
+const server = http.createServer(app);
+
+// Criar um servidor WebSocket
+const wss = new WebSocket.Server({ server });
 
 wss.on('connection', (ws) => {
-    console.log('Novo cliente conectado');
+    console.log('Cliente conectado');
 
+    // Enviar uma mensagem para o cliente
+    ws.send('Bem-vindo ao servidor WebSocket!');
+
+    // Receber mensagens do cliente
     ws.on('message', (message) => {
-        console.log(`Recebido: ${message}`);
-    
+        console.log(`Mensagem recebida: ${message}`);
+        // Enviar a mensagem de volta para o cliente
         ws.send(`Você disse: ${message}`);
     });
 
     ws.on('close', () => {
         console.log('Cliente desconectado');
     });
-
-    ws.send('Bem-vindo ao servidor WebSocket!');
 });
 
-console.log('Servidor WebSocket está rodando em ws://localhost:8080');
+// Iniciar o servidor
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Servidor está rodando na porta ${PORT}`);
+});
